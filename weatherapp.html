@@ -17,9 +17,9 @@
 
         .card {
             width: 90%;
-            max-width: 470px;
-            background: linear-gradient(135deg, #f14cbf, #b833d3);
-            color: #d0eacf;
+            max-width: 500px;
+            background: linear-gradient(135deg, #4cd5f1, #b4dde7);
+            color: #0c0d0c;
             margin: 100px auto 0;
             border-radius: 20px;
             padding: 40px 35px;
@@ -36,8 +36,8 @@
         .search input {
             border: 0;
             outline: 0;
-            background-color: rgb(169, 212, 238);
-            color: rgb(212, 214, 81);
+            background-color: rgb(6, 153, 244);
+            color: rgb(94, 57, 215);
             padding: 10px 25px;
             height: 60px;
             border-radius: 30px;
@@ -50,7 +50,7 @@
         .search button {
             border: 0;
             outline: 0;
-            background-color:white;
+            background-color: white;
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -105,15 +105,17 @@
             margin-top: -6px;
 
         }
-        .weather{
-        display:none;    
+
+        .weather {
+            display: none;
         }
-        .error{
-          text-align: left;
-          margin-left: 12px; 
-          font-size: 15px;
-          margin-top: 13px; 
-          display: none;
+
+        .error {
+            text-align: left;
+            margin-left: 12px;
+            font-size: 15px;
+            margin-top: 13px;
+            display: none;
         }
     </style>
     <title>Weather App</title>
@@ -130,16 +132,15 @@
             </button>
         </div>
         <div class="error">
-<p>Ivalid Location</p>
+            <p>Ivalid Location</p>
         </div>
         <div class="weather">
-            <img src="https://cdn4.iconfinder.com/data/icons/weatherful/72/Raining_Sun-512.png" alt="rainy"
-                class="weather-icon">
+            <img src="https://media.tenor.com/qqW_PLtz05kAAAAi/happy-excited.gif" alt="rainy" class="weather-icon">
             <h1 class="temperature">25°C</h1>
             <h2 class="city">California</h2>
             <div class="details">
                 <div class="col">
-                    <img src="https://cdn3.iconfinder.com/data/icons/meteocons/512/fog-512.png" alt="humidity"
+                    <img src="https://media.tenor.com/axfa3h0CUnYAAAAi/sweat-swt.gif" alt="humidity"
                         class="weather-icon">
                     <div>
                         <p class="humidity">50%</p>
@@ -147,7 +148,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <img src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-27-512.png" alt="wind"
+                    <img src="https://media.tenor.com/ZVMeEFft97cAAAAi/shrimp-umbrella.gif" alt="wind"
                         class="weather-icon">
                     <div>
                         <p class="wind">15Kmph</p>
@@ -158,91 +159,91 @@
         </div>
     </div>
     <script>
-        const apiKey = "e7740192a5d2e88ca26f03fcf30fc6b";
-        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
-const searchBox = document.querySelector(".search input");
-const searchBtn = document.querySelector(".search button");
-const weatherIcon = document.querySelector(".weather-icon")
+        const apiKey = "e7740192a5d2e88ca26f03fcf30fc6bd";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
+        const searchBox = document.querySelector(".search input");
+        const searchBtn = document.querySelector(".search button");
+        const weatherIcon = document.querySelector(".weather-icon")
 
 
-        async function checkWeather(city){
-        const response = await fetch(apiUrl + city + '&appid=e7740192a5d2e88ca26f03fcf30fc6b');
-            if(response.status == 404){
+        async function checkWeather(city) {
+            const response = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
+            if (response.status == 404) {
                 document.querySelector(".error").style.display = "block";
                 document.querySelector(".weather").style.display = "none";
 
-            }else{
+            } else {
                 var data = await response.json();
 
-            
-document.querySelector(".city").innerHTML = data.name;
-document.querySelector(".temperature").innerHTML = data.main.temperature + "°C";
-document.querySelector(".humidity").innerHTML = data.main.humidity + "%" ;
-document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
 
-if(data.weather[0].main == "Clouds"){
-weatherIcon.src = "https://cdn2.iconfinder.com/data/icons/weather-color-2/500/weather-27-512.png"
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".temperature").innerHTML = data.main.temp + "°C";
+                document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+                document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
 
-}
-else if(data.weather[0].main == "Clear"){
- weatherIcon.src = "https://cdn2.iconfinder.com/data/icons/weather-collection-1/512/rainnyday-512.png"
+                if (data.weather[0].main == "Clouds") {
+                    weatherIcon.src = "https://media.tenor.com/G-j8W1JlfXoAAAAi/weather-cloudy.gif"
 
-}
-else if(data.weather[0].main == "Rain"){
- weatherIcon.src = "https://cdn4.iconfinder.com/data/icons/weather-129/64/weather-5-512.png"
-    
-}
-else if(data.weather[0].main == "Drizzle"){
- weatherIcon.src = "https://cdn2.iconfinder.com/data/icons/weather-color-2/500/weather-08-512.png"
-    
-}
-else if(data.weather[0].main == "Mist"){
- weatherIcon.src = "https://cdn4.iconfinder.com/data/icons/weatherful/72/Drip-512.png"
-    
-}
+                }
+                else if (data.weather[0].main == "Clear") {
+                    weatherIcon.src = "https://media.tenor.com/jkuCC4pnGygAAAAi/rainbow-colors.gif"
 
-document.querySelector(".weather").style.display = "block";
+                }
+                else if (data.weather[0].main == "Rain") {
+                    weatherIcon.src = "https://media.tenor.com/qqW_PLtz05kAAAAi/happy-excited.gif"
+
+                }
+                else if (data.weather[0].main == "Drizzle") {
+                    weatherIcon.src = "https://media.tenor.com/RnD_p8PVRAAAAAAi/rain-hujan.gif"
+
+                }
+                else if (data.weather[0].main == "Mist") {
+                    weatherIcon.src = "https://media.tenor.com/z71oPeiyOVsAAAAi/fog-froggy.gif"
+
+                }
+
+                document.querySelector(".weather").style.display = "block";
             }
-            
+
             var data = await response.json();
 
-            
-document.querySelector(".city").innerHTML = data.name;
-document.querySelector(".temperature").innerHTML = Math.round(data.main.temperature) + "°C";
-document.querySelector("humidity").innerHTML = data.main.humidity + "%" ;
-document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
 
-if(data.weather[0].main == "Clouds"){
-weatherIcon.src = "https://cdn2.iconfinder.com/data/icons/weather-color-2/500/weather-27-512.png"
+            document.querySelector(".city").innerHTML = data.name;
+            document.querySelector(".temperature").innerHTML = Math.round(data.main.temp) + "°C";
+            document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+            document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
 
-}
-else if(data.weather[0].main == "Clear"){
- weatherIcon.src = "https://cdn2.iconfinder.com/data/icons/weather-collection-1/512/rainnyday-512.png"
+            if (data.weather[0].main == "Clouds") {
+                weatherIcon.src = "https://media.tenor.com/G-j8W1JlfXoAAAAi/weather-cloudy.gif"
 
-}
-else if(data.weather[0].main == "Rain"){
- weatherIcon.src = "https://cdn4.iconfinder.com/data/icons/weather-129/64/weather-5-512.png"
-    
-}
-else if(data.weather[0].main == "Drizzle"){
- weatherIcon.src = "https://cdn2.iconfinder.com/data/icons/weather-color-2/500/weather-08-512.png"
-    
-}
-else if(data.weather[0].main == "Mist"){
- weatherIcon.src = "https://cdn4.iconfinder.com/data/icons/weatherful/72/Drip-512.png"
-    
-}
+            }
+            else if (data.weather[0].main == "Clear") {
+                weatherIcon.src = "https://media.tenor.com/jkuCC4pnGygAAAAi/rainbow-colors.gif"
 
-document.querySelector(".weather").style.display = "block";
-document.querySelector(".error").style.display = "none";
+            }
+            else if (data.weather[0].main == "Rain") {
+                weatherIcon.src = "https://media.tenor.com/qqW_PLtz05kAAAAi/happy-excited.gif"
 
-}
+            }
+            else if (data.weather[0].main == "Drizzle") {
+                weatherIcon.src = "https://media.tenor.com/RnD_p8PVRAAAAAAi/rain-hujan.gif"
 
-searchBtn.addEventListener("click",()=>{
-    checkWeather(searchBox.value);  
+            }
+            else if (data.weather[0].main == "Mist") {
+                weatherIcon.src = "https://media.tenor.com/z71oPeiyOVsAAAAi/fog-froggy.gif"
 
-})
-checkWeather();
+            }
+
+            document.querySelector(".weather").style.display = "block";
+            document.querySelector(".error").style.display = "none";
+
+        }
+
+        searchBtn.addEventListener("click", () => {
+            checkWeather(searchBox.value);
+
+        })
+        //checkWeather();
     </script>
 
 
@@ -251,3 +252,7 @@ checkWeather();
 </body>
 
 </html>
+
+
+
+
